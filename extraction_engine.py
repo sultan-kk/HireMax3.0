@@ -118,12 +118,12 @@ def _gemini_ocr_lines(pil_image: Image.Image):
     network error, bad response) so the caller can fall back to Tesseract
     without crashing the app.
     """
-    
-    response = client.models.generate_content(
-        model=config.GEMINI_MODEL,
-        contents=[_GEMINI_PROMPT, pil_image],
-      )
-    lines_raw = _parse_gemini_json_lines(response.text)
+    try:   
+        response = client.models.generate_content(
+            model=config.GEMINI_MODEL,
+            contents=[_GEMINI_PROMPT, pil_image],
+        )
+        lines_raw = _parse_gemini_json_lines(response.text)
         if not lines_raw:
             return None
         # Gemini doesn't expose a per-word confidence score like Tesseract;
