@@ -97,15 +97,10 @@ def _parse_gemini_json_lines(raw_text: str):
         raise ValueError("Gemini did not return a JSON array")
     return [str(item).strip() for item in items if str(item).strip()]
 
+from google import genai
 
-def _gemini_ocr_lines(pil_image: Image.Image):
-    """
-    Sends the image to Gemini for transcription. Returns a list of line
-    dicts on success, or None on ANY failure (missing key, no SDK,
-    network error, bad response) so the caller can fall back to Tesseract
-    without crashing the app.
-    """
-    api_key = None
+# Streamlit secrets ya local .env se key uthane ka tareeqa
+api_key = None
 try:
     api_key = st.secrets.get("GEMINI_API_KEY")
 except Exception:
@@ -116,7 +111,15 @@ if not api_key:
 
 # Client initialize karein
 client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(
+def _gemini_ocr_lines(pil_image: Image.Image):
+    """
+    Sends the image to Gemini for transcription. Returns a list of line
+    dicts on success, or None on ANY failure (missing key, no SDK,
+    network error, bad response) so the caller can fall back to Tesseract
+    without crashing the app.
+    """
+    
+         response = client.models.generate_content(
             model=config.GEMINI_MODEL,
             contents=[_GEMINI_PROMPT, pil_image],
         )
