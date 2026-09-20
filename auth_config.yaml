@@ -23,7 +23,7 @@ credentials:
     hr_admin:
       email: hr_admin@example.com
       name: HR Admin
-      password: REPLACE_WITH_GENERATED_HASH
+      password: $2b$12$xU09N8XOUEVcpfP07d.jUegCb9zu8tNUTMOXToAe1Le./BQU0jvNO
     # hr_reviewer_2:
     #   email: reviewer2@example.com
     #   name: Second Reviewer
