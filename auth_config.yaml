@@ -1,0 +1,38 @@
+# auth_config.yaml
+# -----------------
+# Login credentials for HireMatrix (multi-user HR team access), read by
+# app.py via streamlit-authenticator.
+#
+# SETUP (do this before running the app):
+#   1. pip install -r requirements.txt   (installs streamlit-authenticator + bcrypt)
+#   2. python generate_password_hash.py  (prompts you for a password, prints a hash)
+#   3. Paste that hash below, replacing REPLACE_WITH_GENERATED_HASH
+#   4. Add one block per HR user who needs a login (copy the "hr_admin"
+#      block, change the username/name/email, generate a new hash for
+#      each person's own password)
+#
+# NEVER commit real production passwords/hashes to a public GitHub repo
+# in plain sight of others if this is meant to be a private tool — for a
+# public repo, keep this file out of version control (e.g. add
+# `auth_config.yaml` to .gitignore) and create it manually on each
+# machine/deployment instead, or use Streamlit Cloud's "Secrets" feature
+# to inject it at deploy time.
+
+credentials:
+  usernames:
+    hr_admin:
+      email: hr_admin@example.com
+      name: HR Admin
+      password: REPLACE_WITH_GENERATED_HASH
+    # hr_reviewer_2:
+    #   email: reviewer2@example.com
+    #   name: Second Reviewer
+    #   password: REPLACE_WITH_GENERATED_HASH
+
+cookie:
+  name: hirematrix_auth_cookie
+  key: change_this_to_a_random_secret_string
+  expiry_days: 7
+
+preauthorized:
+  emails: []
