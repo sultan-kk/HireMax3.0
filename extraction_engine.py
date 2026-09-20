@@ -119,7 +119,7 @@ def _gemini_ocr_lines(pil_image: Image.Image):
     without crashing the app.
     """
     
-         response = client.models.generate_content(
+            response = client.models.generate_content(
             model=config.GEMINI_MODEL,
             contents=[_GEMINI_PROMPT, pil_image],
         )
