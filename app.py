@@ -83,7 +83,7 @@ def _run_auth_gate():
         auth_config.get("preauthorized", {}).get("emails", []),
     )
 
-    name, auth_status, username = authenticator.login("Login", "main")
+    name, auth_status, username = authenticator.login(fields={'Form name': 'Login'}, location='main')
 
     if auth_status is False:
         st.error("Username or password is incorrect.")
