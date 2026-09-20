@@ -124,14 +124,14 @@ def _gemini_ocr_lines(pil_image: Image.Image):
             contents=[_GEMINI_PROMPT, pil_image],
         )
     lines_raw = _parse_gemini_json_lines(response.text)
-if not lines_raw:
+    if not lines_raw:
             return None
         # Gemini doesn't expose a per-word confidence score like Tesseract;
         # GEMINI_LINE_CONFIDENCE is a flat, high value reflecting that
         # vision-model transcription is generally very reliable. It still
         # participates normally in parser.py's OCR_CONFIDENCE_THRESHOLD
         # check, it just won't usually get flagged as "low confidence".
-        return [
+      return [
             {"text": line, "confidence": config.GEMINI_LINE_CONFIDENCE, "bbox": (0, 0, 0, 0)}
             for line in lines_raw
         ]
