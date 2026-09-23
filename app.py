@@ -336,8 +336,8 @@ elif st.session_state.nav == "review":
             with c2:
                 rel["email"] = st.text_input(t("email", L), value=rel.get("email", ""))
                 rel["education"] = st.text_input(t("education", L), value=rel.get("education", ""))
-            rel["skills"] = st.text_area(t("skills", L), value=rel.get("skills", ""), height=80)
-             rel["Latest Experience"] = st.text_area(t("Latest Experience", L), value=rel.get("Latest Experience", ""), height=80)
+                rel["skills"] = st.text_area(t("skills", L), value=rel.get("skills", ""), height=80)
+                rel["Latest Experience"] = st.text_area(t("Latest Experience", L), value=rel.get("Latest Experience", ""), height=80)
             st.markdown("</div>", unsafe_allow_html=True)
 
             # --- Excluded / low-confidence text: accurate, but secondary & collapsed ---
@@ -348,7 +348,7 @@ elif st.session_state.nav == "review":
                     t("select_field_placeholder", L): None,
                     t("full_name", L): "name", t("email", L): "email", t("phone", L): "phone",
                     t("skills", L): "skills", t("experience", L): "experience_years",
-                    t("education", L): "education",("Latest Experience",L): "Latest Experience"
+                    t("education", L): "education",t("Latest Experience",L): "Latest Experience"
                 }
                 if not active_irrelevant:
                     st.success(t("no_excluded", L))
